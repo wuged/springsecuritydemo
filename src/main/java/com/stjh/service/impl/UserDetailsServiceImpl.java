@@ -21,10 +21,10 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     private PasswordEncoder bCryptPasswordEncoder;
 
     @Override
-    public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         // 1.查询数据库判断用户名是否存在，如果不存在抛出UsernameNotFoundException
 
-        if (!userName.equals("admin")) {
+        if (!username.equals("admin")) {
             throw new UsernameNotFoundException("用户名不存在");
         }
         // 2.把数据库的密码放到user构造方法中去，此处加密是为了模拟数据库中加密后的密码
@@ -32,6 +32,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
         bCryptPasswordEncoder.matches("123456", password);
         // commaSeparatedStringToAuthorityList("权限，多个逗号相隔")
-        return new User(userName, password, AuthorityUtils.commaSeparatedStringToAuthorityList("admin,normal"));
+        return new User(username, password, AuthorityUtils.commaSeparatedStringToAuthorityList("admin,normal"));
     }
 }

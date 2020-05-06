@@ -11,9 +11,27 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 public class LoginController {
 
-    @PostMapping("/login")
+    /*@PostMapping("/login")
     public String login() {
         System.out.println("登录");
         return "redirect:main.html";
+    }*/
+
+    /**
+     * 登录成功后跳转到主页
+     * @return
+     */
+    @PostMapping("/toMain")
+    public String toMain() {
+        return "redirect:/main.html";
+    }
+
+    /**
+     * 登录成功后跳转到主页
+     * @return
+     */
+    @PostMapping("/toFail")
+    public String toFail() {
+        return "redirect:/fail.html";
     }
 }
