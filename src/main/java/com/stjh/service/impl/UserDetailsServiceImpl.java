@@ -32,6 +32,8 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
         bCryptPasswordEncoder.matches("123456", password);
         // commaSeparatedStringToAuthorityList("权限，多个逗号相隔")
-        return new User(username, password, AuthorityUtils.commaSeparatedStringToAuthorityList("admin,normal"));
+        return new User(username, password,
+                // 如果要加角色以ROLE_ 开头，如下ROLE_abc即有abc这个角色名
+                AuthorityUtils.commaSeparatedStringToAuthorityList("admin,normal,ROLE_abc,/main.html"));
     }
 }

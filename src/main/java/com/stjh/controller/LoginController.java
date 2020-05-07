@@ -1,5 +1,7 @@
 package com.stjh.controller;
 
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -21,6 +23,8 @@ public class LoginController {
      * 登录成功后跳转到主页
      * @return
      */
+    //@Secured("ROLE_abc")
+    @PreAuthorize("hasRole('abc')")
     @PostMapping("/toMain")
     public String toMain() {
         return "redirect:/main.html";
