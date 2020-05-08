@@ -79,7 +79,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .anyRequest().authenticated();                       // 其他所有请求都必须认证。必须登录后才能访问
                 //.anyRequest().access("@userServiceImpl.hasPermission(request, authentication)"); // 自定义方法实现权限控制
 
-        // 关闭csrf防护
+        // 关闭csrf防护（跨站请求伪造）
         http.csrf().disable();
 
         // 403异常处理
@@ -92,7 +92,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 //.rememberMeParameter("rememberMe") //form表单：记住我 name，默认remember-me
                 .userDetailsService(userDetailsService)  // 用户登录逻辑
                 .tokenRepository(getPersistentTokenRepository());
-        // 可以用and()连接这五部分代码
+
+        // 退出
+        http.logout()
+                .logoutSuccessUrl("/login.html"); // 指定跳转到登录页，而不是默认的/login?logout
+        // 可以用and()连接这些代码
     }
 
     /**
